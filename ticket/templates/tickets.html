@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %}Tickets{% endblock %}
+
+
+{% block heading %}
+<div class="row">
+  <div class="col-sm-12">
+    <h1>
+      <span>tickets</span>
+   <a href="{% url 'create_a_ticket' %}"><button type="button" class="btn btn-primary pull-right p5">Add ticket</button></a>
+   </h1>
+  </div>
+</div>
+{% endblock %} 
+
+{% block content %} {% for ticket in tickets %}
+<div class="row">
+  <div class="col-sm-12">
+<div class="card border-primary mb-3">
+  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fa fa-eye p5"></i>{{ ticket.views }}
+    <i class="fa fa-arrow-up p5"></i>{{ ticket.ticket_upvotes }}</span></div>
+  <div class="card-body">
+    <h4 class="card-title">{{ ticket.title|capfirst }}</h4>
+    <p class="card-text">{{ ticket.description|capfirst }}</p>
+    <div class="card-footer text-muted">
+      {{ ticket.creator|capfirst }} | {{ ticket.created_date }}
+      <a href="{% url 'single_ticket_view' ticket.id %}" class="card-link">View ticket</a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+{% endfor %} {% endblock %}

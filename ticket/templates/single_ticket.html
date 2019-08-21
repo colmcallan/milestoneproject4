@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% load bootstrap_tags %}
+{% block title %}{{ ticket.title }}{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>{{ ticket.title }}</h1><span class="badge badge-danger">{{ ticket.status }}</span>
+    <div class="inline">
+        <p class="p5"><span class=""><i class="fa fa-eye p5"></i>{{ ticket.views }}<i class="fa fa-arrow-up p5"></i>{{ ticket.ticket_upvotes }}</span></p>
+        {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'add_to_cart' ticket.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="id" value="{{ ticket.id }}">
+            <button type="submit" class="btn btn-outline-primary upvote-btn"><a>Upvote ticket</a></button>
+        </form>
+        {% else %}
+        <span>Please login to upvote a bug.</span>
+        {% endif %}
+    </div>
+    <p class="lead">{{ ticket.description }}</p>
+    <hr class="my-4">
+    <p>Created by: {{ticket.creator }} on {{ ticket.created_date }}</p>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+
+        <form method="POST">
+            <fieldset>
+                <h1>Comments:</h1>
+                {% csrf_token %} {{ ticket_comment_form|as_bootstrap }}
+                {% if user.is_authenticated %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                {% else %}
+                <p><strong>Please login to comment on tickets.</strong></p>
+                <button type="button" class="btn btn-primary disabled">Submit</button>
+                {% endif %}
+                
+            </fieldset>
+        </form>
+        
+        {% if comments.count == 0 %}
+        <br> 
+        <h4>There are no comments on this ticket yet!</h4>
+        {% else %}
+        
+        {% for comment in comments %}
+        <hr class="my-4">
+        <blockquote class="blockquote text-left">
+            <p class="mb-0">{{ comment.comment|capfirst }}</p>
+            <footer class="blockquote-footer">{{ comment.bug|capfirst }}<cite title="Source Title" class="title"> | {{ comment.creator|capfirst }}</cite>
+            <datetime> on {{ comment.created_date }}</datetime></footer>
+        </blockquote>
+        {% endfor %}
+        
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

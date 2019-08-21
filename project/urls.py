@@ -1,5 +1,4 @@
 """project URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
 Examples:
@@ -15,22 +14,29 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from accounts import urls as urls_accounts
-from products import urls as urls_products
-from cart import urls as urls_cart
-from search import urls as urls_search
-from checkout import urls as urls_checkout
-from products.views import all_products
-from django.views import static
-from .settings import MEDIA_ROOT
+from home import urls as home_urls
+from accounts import urls as accounts_urls
+from bugs import urls as bugs_urls
+from features import urls as features_urls
+from cart import urls as cart_urls
+from checkout import urls as checkout_urls
+from search import urls as search_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', all_products, name='index'),
-    url(r'^accounts/', include(urls_accounts)),
-    url(r'^products/', include(urls_products)),
-    url(r'^cart/', include(urls_cart)),
-    url(r'^checkout/', include(urls_checkout)),
-    url(r'^search/', include(urls_search)),
-    url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT})
+    url(r'^', include(home_urls)),
+    url(r'^accounts/', include(accounts_urls)),
+    url(r'^bugs/', include(bugs_urls)),
+    url(r'^features/', include(features_urls)),
+    url(r'^cart/', include(cart_urls)),
+    url(r'^checkout/', include(checkout_urls)),
+    url(r'^search/', include(search_urls)),
 ]
+
+
+admin.site.site_header = ""
+admin.site.site_title = ""
+admin.site.index_title = "W"
+
+from django.contrib.auth.models import Group
+admin.site.unregister(Group)
