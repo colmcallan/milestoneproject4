@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %}bug{% endblock %}
+
+
+{% block heading %}
+<div class="row">
+  <div class="col-sm-12">
+    <h1>
+      <span>bug</span>
+   <a href="{% url 'create_a_bug' %}"><button type="button" class="btn btn-primary pull-right p5">Add Bug</button></a>
+   </h1>
+  </div>
+</div>
+{% endblock %} 
+
+{% block content %} {% for bug in bug %}
+<div class="row">
+  <div class="col-sm-12">
+<div class="card border-primary mb-3">
+  <div class="card-header"><span class="badge badge-danger">{{ bug.status }}</span><span class="card-link"><i class="fa fa-eye p5"></i>{{ bug.views }}
+    <i class="fa fa-arrow-up p5"></i>{{ bug.bug_upvotes }}</span></div>
+  <div class="card-body">
+    <h4 class="card-title">{{ bug.title|capfirst }}</h4>
+    <p class="card-text">{{ bug.description|capfirst }}</p>
+    <div class="card-footer text-muted">
+      {{ bug.creator|capfirst }} | {{ bug.created_date }}
+      <a href="{% url 'single_bug_view' bug.id %}" class="card-link">View bug</a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+{% endfor %} {% endblock %}
