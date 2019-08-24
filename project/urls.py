@@ -16,8 +16,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from home import urls as home_urls
 from accounts import urls as accounts_urls
-from bugs import urls as bugs_urls
-from features import urls as features_urls
+from bug import urls as bug_urls
+from ticket import urls as ticket_urls
 from cart import urls as cart_urls
 from checkout import urls as checkout_urls
 from search import urls as search_urls
@@ -26,17 +26,16 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(home_urls)),
     url(r'^accounts/', include(accounts_urls)),
-    url(r'^bugs/', include(bugs_urls)),
-    url(r'^features/', include(features_urls)),
+    url(r'^bug/', include(bug_urls)),
+    url(r'^ticket/', include(ticket_urls)),
     url(r'^cart/', include(cart_urls)),
     url(r'^checkout/', include(checkout_urls)),
     url(r'^search/', include(search_urls)),
 ]
 
-
-admin.site.site_header = ""
-admin.site.site_title = ""
-admin.site.index_title = "W"
+admin.site.site_header = "Project"
+admin.site.site_title = "Admin Area"
+admin.site.index_title = "Welcome"
 
 from django.contrib.auth.models import Group
 admin.site.unregister(Group)
