@@ -1,0 +1,140 @@
+
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark" style="background-color: #400346;" id="footer">
+
+  <div style="background-color: #600260;" id="footer">
+    <div class="container">
+
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+          <h6 class="mb-0" id="footer">Get connected with us on social networks!</h6>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-7 text-md-right">
+        	<!--Github-->
+        	<div class="footerlinks">
+        	<a href="https://github.com/colmcallan" target="_blank">
+        	<i class="fab fa-github mr-4" style="color: white;"></i>
+        	</a>
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/Jonezd" target="_blank" >
+            <i class="fab fa-facebook-square mr-4" style="color: white;"></i>
+          </a>
+          <!--Linkedin -->
+          <a href="linkedin.com/in/colm-callan-34246597" target="_blank">
+            <i class="fab fa-linkedin-in mr-4" style="color: white;"> </i>
+          </a>
+          <!--Instagram-->
+          <a href="https://www.instagram.com/collybear09/" target="_blank">
+            <i class="fab fa-instagram mr-4" style="color: white;"> </i>
+          </a>
+</div>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+  </div>
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5">
+
+    <!-- Grid row -->
+    <div class="row mt-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold" id="footer">Company name</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;" id="hr">
+        <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+          consectetur
+          adipisicing elit.</p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold" id="footer">Services</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;" id="hr">
+        <p>
+          <a href="{% url 'show_all_bug' %}" id="footer">Stop the bugs!</a>
+        </p>
+        <p>
+          <a href="{% url 'show_all_tickets' %}" id="footer">Raise a ticket for premium resolution!</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" id="footer">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold" id="footer">Useful links</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;" id="hr">
+       {% if not user.is_authenticated %}
+						<p>
+							<a href="{% url 'login' %}" class="item" id="footer">Login</a>
+							</p>
+					{% else %}
+						<p>
+							<a href="{% url 'logout' %}" class="item" id="footer">Logout</a>
+							</p>
+					{% endif %}
+        <p>
+          <a href="{% url 'index' %}" id="footer">Home</a>
+        </p>
+        <p>
+          <a href="#!" id="footer">FAQ's</a>
+        </p>
+        <p>
+          <a href="#!" id="footer">Contact Us</a>
+        </p>
+        <p>
+        	<a href="https://stripe.com/ie" rel="noopener" target="_blank" class="item" id="footer">Secure Stripe Payments</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold" id="footer">Contact Me</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;" id="hr">
+        <p id="footer">
+          <i class="fas fa-home mr-3"></i> Monksfield Lawns</p>
+        <p id="footer">
+          <i class="fas fa-envelope mr-3"></i> colmcallan91@gmail.com</p>
+        
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" id="footer">© 2019 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/" id="footer"> Colm Callan</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
