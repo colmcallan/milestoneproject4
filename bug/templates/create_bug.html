@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% load bootstrap_tags %}
 {% block title %}Create a bug{% endblock %}
-
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
 {% block heading %} <h1>Create a bug</h1> {% endblock %}
 
 {% block content %}
@@ -14,5 +14,5 @@
         </form>
     </div>
 </div>
-
-{% endblock %}
+ 
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}

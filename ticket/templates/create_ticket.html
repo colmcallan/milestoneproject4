@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% load bootstrap_tags %}
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
 {% block title %}Create a Ticket{% endblock %}
 
 {% block heading %} <h1>Create a ticket</h1> {% endblock %}
@@ -10,7 +11,7 @@
         <form method="POST">
             {% csrf_token %}
             {{ form | as_bootstrap }}
-            <button type="submit" id="submitbtn" class="btn btn-primary">Submit</button>
+            <button type="submit"  class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>

@@ -1,5 +1,5 @@
-    
 {% extends 'base.html' %}
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
 {% load bootstrap_tags %}
 {% block title %}Register Account{% endblock %}
 
@@ -14,5 +14,5 @@
     </form>
     <br>
     <p>Already Registered? Click <a href="{% url 'login' %}">here.</a></p>
-{% endblock %}
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}
 </main>

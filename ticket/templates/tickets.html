@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block title %}Tickets{% endblock %}
-
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
 
 {% block heading %}
 <div class="row">
@@ -16,8 +16,8 @@
 <div class="row">
   <div class="col-sm-12">
 <div class="card border-primary mb-3">
-  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fa fa-eye p5"></i>{{ ticket.views }}
-    <i class="fa fa-arrow-up p5"></i>{{ ticket.ticket_upvotes }}</span></div>
+  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i></i>{{ ticket.views }}
+    <i class="fas fa-arrow-up"></i>{{ ticket.ticket_upvotes }}</span></div>
   <div class="card-body">
     <h4 class="card-title">{{ ticket.title|capfirst }}</h4>
     <p class="card-text">{{ ticket.description|capfirst }}</p>
