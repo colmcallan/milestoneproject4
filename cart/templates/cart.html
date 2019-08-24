@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap_tags %} 
-
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
 {% block title %}Your Cart{% endblock %}
 
 {% block heading %}<h1>Your Cart:</h1>{% endblock %}
@@ -12,11 +12,11 @@
     <div class="wrapper p5">
       <div class="card border-primary mb-3">
         {% if item.ticket.paid == True %}
-        <div class="card-header">Quantity: {{ item.quantity }}<span class="card-link"><a href="{% url 'decrease_cart' item.id %}"><i class="fa fa-arrow-down"></i></a>
+        <div class="card-header">Quantity: {{ item.quantity }}<span class="card-link"><a href="{% url 'decrease_cart' item.id %}"><i class="fas fa-arrow-down"></i></a>
         <a href="{% url 'increase_cart' item.id %}"><i class="fa fa-arrow-up p5"></a></i></span></div>
         {% else %}
         <div class="card-header"><span class="badge badge-danger">{{ item.ticket.status }}</span><span class="card-link"><i class="fa fa-eye p5"></i>{{ item.ticket.views }}
-        <i class="fa fa-arrow-up p5"></i>{{ item.ticket.ticket_upvotes }}</span></div>
+        i class="fas fa-arrow-up"></i>{{ item.ticket.ticket_upvotes }}</span></div>
         {% endif %}
         <div class="card-body">
           <h4 class="card-title">{{ item.ticket }}</h4>
@@ -54,5 +54,5 @@
   </div>
   {% endif %}
 </div>
-{% endblock %}
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}
 

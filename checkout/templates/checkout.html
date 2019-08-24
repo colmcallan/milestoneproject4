@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% load static from staticfiles %}
 {% load bootstrap_tags %} 
-
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
 {% block title %}Checkout{% endblock %} 
 
 {% block head_js %}
@@ -19,12 +19,12 @@
 {% block content %}
 <div class="row">
     {% for item in cart_items %}
-    <div class="col-md-4">
+    <div class="col-md-4"> <!--cart item (ticket) selected-->
         <div class="wrapper p5">
             <div class="card border-primary mb-3">
                 {% if item.feature.paid == False %}
-                <div class="card-header"><span class="badge badge-danger">{{ item.feature.status }}</span><span class="card-link"><i class="fa fa-eye p5"></i>{{ item.feature.views }}
-        <i class="fa fa-arrow-up p5"></i>{{ item.feature.feature_upvotes }}</span></div>
+                <div class="card-header"><span class="badge badge-danger">{{ item.feature.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{ item.feature.views }}
+                <i class="fas fa-arrow-up"></i>{{ item.feature.feature_upvotes }}</span></div>
                 {% else %}
                 <div class="card-header">Upvote quantity: {{ item.quantity }} </div>
                 {% endif %}
@@ -36,10 +36,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!--end of ticket-->
     {% endfor %}
 </div>
-
+<!--checkout form with payment details and billing address, stripe form -->
 <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
     <div id="credit-card-errors" style="display: none;">
         <div id="alert-message block-message error" id="stripe-error-message"></div>
@@ -58,5 +58,5 @@
     <div class="form-group col-md-12">
         <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
     </div>
-</form>
-{% endblock %}
+</form> <!--end of payment form-->
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}

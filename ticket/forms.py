@@ -1,5 +1,5 @@
 from django import forms
-from .models import FeatureComment, Feature
+from .models import TicketComment, Ticket
 
 class TicketCommentForm(forms.ModelForm):
     class Meta:

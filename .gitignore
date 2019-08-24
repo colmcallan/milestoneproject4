@@ -2,6 +2,3 @@ db.sqlite3
 __pycache
 .~c9*
 env.py
-*.png
-static/
-media/

@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
-
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
+{% load staticfiles %}
+{% block head_title %}Bugs No More{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'home/css/home.css' %}"/>{% endblock %}
 {% block content %}
 
-{% endblock %}
+<header class="masthead" style="background-image: url('http://www.madisonvalleyranch.com/wp-content/themes/options/images/skins/headers/boxed/header-purpleHaze.jpg')">
+        <div style="width 100%;">
+        <h1 style="color: transparent;">Everything  searched for and more!</h1>
+        <h2 style="color: transparent;">Choose a recipe and try it!</h2>    
+       </div>
+</header>
+
+<br>
+<br>
+<section class="section">
+     <h1>Welcome to bugs no more!</h1>
+    <h2>Choose a recipe and try it!</h2>
+</section>
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}
