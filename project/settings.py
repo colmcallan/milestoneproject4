@@ -26,7 +26,8 @@ SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['801863a241af4cf3be3aa312c134c496.vfs.cloud9.us-east-1.amazonaws.com']
+ALLOWED_HOSTS = ['801863a241af4cf3be3aa312c134c496.vfs.cloud9.us-east-1.amazonaws.com',
+                 'milestone-project-4.herokuapp.com']
 
 
 # Application definition
