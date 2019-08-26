@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %} {% endblock %}</title>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/572952883f.js"></script>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css">
 
@@ -31,17 +34,47 @@
     </div>
     {% endfor %} {% endif %}
 
-        <main>
+        
             
-       {% block content %} {% endblock %} {% block footer %} {% endblock %}
-       
-    </main>
-    
-</body>
+<main>
+        {% block heading %} {% endblock %}
+        {% block content %} {% endblock %}
+        <!-- to top button -->
+		{% block to-top %} {% include 'includes/_to_top.html' %} {% endblock %}
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<!-- busy-loader -->
+		{% include 'includes/_busy_loader.html' %}
+    </main>       
+    
+
+    {% block footer %} {% endblock %}
+    <!-- Bootstrap CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/572952883f.js"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+<script>
+    // scroll back to top button
+    function scrollToTop() {
+        window.addEventListener('scroll', () => {
+            const toTopBtn = document.querySelector('#to-top-btn');
+            if (window.innerWidth > 800) {
+                if (window.scrollY > 500 ? toTopBtn.style.right = "30px" : toTopBtn.style.right = "-50px");
+            }
+            else {
+                toTopBtn.style.right = "-50px";
+            }
+        });
+    }
+    scrollToTop();
+
+
+
+    // change page / busy loader
+    function busyLoader(delay = 0) {
+        $("#busy-loader").fadeIn("fast");
+        const animation = () => $("#busy-loader").fadeOut("slow");
+        setTimeout(animation, delay)
+    }
+</script>
+</body>
+
 </html>

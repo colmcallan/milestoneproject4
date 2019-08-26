@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% load bootstrap_tags %}
 {% block title %}Create a bug{% endblock %}
-{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
+
 {% block heading %} <h1>Create a bug</h1> {% endblock %}
 
 {% block content %}
@@ -10,9 +10,9 @@
         <form method="POST">
             {% csrf_token %}
             {{ form | as_bootstrap }}
-            <button type="submit" id="bugbtn" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
- 
+
 {% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}

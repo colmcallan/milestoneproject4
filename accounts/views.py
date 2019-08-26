@@ -84,12 +84,12 @@ def profile(request):
     """User profile page"""
     user = User.objects.get(email=request.user.email)
     bug = Bug.objects.filter(creator=user.id)
-    tickets = Ticket.objects.filter(creator=user.id, paid=True)
+    ticket = Ticket.objects.filter(creator=user.id, paid=True)
     
     context = {
         'profile': user,
         'bug': bug,
-        'tickets': tickets,
+        'ticket': ticket,
     }
     
     return render(request, 'profile.html', context)

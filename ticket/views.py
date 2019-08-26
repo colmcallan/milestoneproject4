@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Ticket, TicketComment
 from django.utils import timezone
 from django.contrib import messages
@@ -53,7 +53,33 @@ def single_ticket_view(request, pk):
     
     return render(request, 'single_ticket.html', context)
     
+@login_required
+def edit_a_ticket(request, pk):
+    """
+    Route to allow users to edit their bug
+    """
+    ticket = get_object_or_404(Ticket, pk=pk)
     
+    if request.method == "POST":
+        form = TicketCreationForm(request.POST, instance=ticket)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.creator = request.user
+            ticket.save()
+            messages.success(request, "Thanks {0}, {1} has been updated."
+                             .format(request.user, ticket.title),
+                             extra_tags="alert-success")
+            return redirect(reverse('profile'))
+    
+    else:
+        form = TicketCreationForm(instance=ticket)
+        
+    context = {
+        'form': form,
+    }
+    return render(request, 'edit_ticket.html', context)
+    
+ 
 @login_required
 def create_a_ticket(request):
     form = TicketCreationForm(request.POST)

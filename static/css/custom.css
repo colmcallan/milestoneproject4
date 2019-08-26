@@ -6,6 +6,15 @@ main {
     margin-top: 3rem;
 }
 
+footer {
+    position: fixed;
+    bottom: 0px;
+    height: 497px;
+    width: 100%;
+    background-color: #400346;
+}
+
+
 
 .icon-bar {
     background-color: #ffffff;
@@ -100,6 +109,14 @@ header.masthead .site-heading h1 {
     margin-top: 0;
 }
 
+.editbg {
+    width: 80%;
+    margin-left: 80px;
+    margin-top: 20px;
+}
+
+
+
 .searchbtn {
     width: 100px;
     height: 50px;
@@ -152,5 +169,4 @@ fieldset {
 .profile {
     margin: 40px;
 }
-
 
