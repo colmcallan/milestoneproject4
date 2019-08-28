@@ -1,53 +1,52 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="{% url 'index' %}">Bugs No More</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-dark info-color" style="background-color: #400346;">
+    <a class="navbar-brand" href="{% url 'index' %}">Bugs No More</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show_all_bug' %}">bug</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'show_all_tickets' %}">tickets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'view_cart' %}">
-                            Cart
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link waves-effect waves-light" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" href="{% url 'profile' %}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" href="{% url 'logout' %}">Log Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" href="{% url 'login' %}">Log In</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+                <a class="nav-link waves-effect waves-light" href="{% url 'view_cart' %}">
+                             Cart
                             <i class="fa fa-shopping-cart"></i>
                             {% if ticket_count > 0 %}
                             <label class="badge badge-pill badge-secondary">{{ ticket_count }}</label>
                             {% endif %}
-                        </a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item waves-effect waves-light" href="{% url 'faq' %}">FAQ's</a>
+                    <a class="dropdown-item waves-effect waves-light" href="{% url 'show_all_bug' %}">bugs</a>
+                    <a class="dropdown-item waves-effect waves-light" href="{% url 'show_all_tickets' %}">tickets</a>
+                    <a class="dropdown-item waves-effect waves-light" href="mailto:colmcallan91@gmail.com?subject=Enquiry regarding bugs no more">Email Us</a>
+                    <a class="dropdown-item waves-effect waves-light" href="https://stripe.com/ie" rel="noopener" target="_blank" >Secure Stripe Payments</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline" action="{% url 'search' %}" method="GET">
+            <div class="md-form my-0">
                 <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search">
-                
-            </form>
-            <button id="" class="searchbtn" type="submit">Search</button>
-        </div>
-    </nav>
-    <br>
-    
-    <header class="masthead" style="background-image: url('http://www.madisonvalleyranch.com/wp-content/themes/options/images/skins/headers/boxed/header-purpleHaze.jpg')">
-        <div style="width 100%;">
-      
-       </div>
-       </header>
+            </div>
+        </form>
+    </div>
+</nav>

@@ -14,6 +14,7 @@
     <!-- Font Awesome -->
     <!-- Bootstrap CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/lux/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
     <!-- My custom CSS -->
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" type="text/css"> {% block head_js %} {% endblock %}
@@ -51,30 +52,8 @@
     <!-- Bootstrap CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script>
-    // scroll back to top button
-    function scrollToTop() {
-        window.addEventListener('scroll', () => {
-            const toTopBtn = document.querySelector('#to-top-btn');
-            if (window.innerWidth > 800) {
-                if (window.scrollY > 500 ? toTopBtn.style.right = "30px" : toTopBtn.style.right = "-50px");
-            }
-            else {
-                toTopBtn.style.right = "-50px";
-            }
-        });
-    }
-    scrollToTop();
 
 
-
-    // change page / busy loader
-    function busyLoader(delay = 0) {
-        $("#busy-loader").fadeIn("fast");
-        const animation = () => $("#busy-loader").fadeOut("slow");
-        setTimeout(animation, delay)
-    }
-</script>
 </body>
 
 </html>
