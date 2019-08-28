@@ -5,7 +5,7 @@ from ticket.models import Ticket
 # Create your views here.
 def search(request):
     bug = Bug.objects.filter(title__icontains=request.GET['q'])
-    ticket = Ticket.objects.filter(title__icontains=request.GET['q'])
+    ticket = Ticket.objects.filter(title__icontains=request.GET['q'], paid=True)
     bug_count = bug.count()
     ticket_count = ticket.count()
     

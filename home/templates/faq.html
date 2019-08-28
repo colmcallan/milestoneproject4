@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
+
+{% block head_title %}FAQ's{% endblock %}
+{% block content %}
+
+	<h1 class="callout">FAQ's</h1>
+	<section class="accordion-section clearfix mt-3" aria-label="Question Accordions">
+  <div class="container">
+  
+	  <h2>Frequently Asked Questions </h2>
+	  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default">
+		  <div class="panel-heading p-3 mb-3" role="tab" id="heading0">
+			<h3 class="panel-title">
+			  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse0" aria-expanded="true" aria-controls="collapse0">
+				What is the benefits of No More Bugs?
+			  </a>
+			</h3>
+		  </div>
+		  <div id="collapse0" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading0">
+			<div class="panel-body px-3 mb-4">
+			  <p>With No More Bugs, you and other promising coders can come together and help each resolve each others bugs in a free enviroment if you're in no rush for a resolution</p>
+			  <ul>
+				<li>Free sign up</li>
+				<li>Pay to increase the response rate of your query being resolved</li>
+				<li>Up-vote system to allow other users who are having the same issue push the issue to top for a quicker turnaround time</li>
+				<li>Amazing support from myself and other highly skilled professional's in the full stack field</li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading p-3 mb-3" role="tab" id="heading1">
+			<h3 class="panel-title">
+			  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+				What is "bug" on the website?
+			  </a>
+			</h3>
+		  </div>
+		  <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+			<div class="panel-body px-3 mb-4">
+			  <p>The page titled "bug" is where users (who are registered) can post the bug they are facing and wait for others to respond with options on how to resolve the bug. For free!</p>
+			</div>
+		  </div>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading p-3 mb-3" role="tab" id="heading2">
+			<h3 class="panel-title">
+			  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="true" aria-controls="collapse2">
+				What is "Ticket" and do I need to use it?
+			  </a>
+			</h3>
+		  </div>
+		  <div id="collapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading2">
+			<div class="panel-body px-3 mb-4">
+			  <p>Are you approaching a project deadline and stuck on an error? unsure of a traceback error? or just simply need a quicker response for your issue? Opt for this service and we promise you that you will make your deadline/have your issue fixed within an exceptionally timely manner</p>
+			</div>
+		  </div>
+		</div>
+		
+		<div class="panel panel-default">
+		  <div class="panel-heading p-3 mb-3" role="tab" id="heading3">
+			<h3 class="panel-title">
+			  <a class="collapsed" role="button" title="" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+				Can I get a refund if I'm not happy with the service?
+			  </a>
+			</h3>
+		  </div>
+		  <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3">
+			<div class="panel-body px-3 mb-4">
+			  <p>As it stands, our services are a non-refundable product as it is a service we're providing and the outcome is having your issue resolved</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+  
+  </div>
+</section>
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %} 
+
+{% block javascript %}
+	<script>
+        $('.tabular.menu .item').tab();
+	</script>
+{% endblock %} 

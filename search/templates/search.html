@@ -8,7 +8,7 @@
 
 {% block content %}
 
-{% for bug in bugs %}
+{% for bug in bug %}
 <div class="row">
   <div class="col-sm-12">
 <div class="card border-primary mb-3">
@@ -27,23 +27,25 @@
 </div>
 {% endfor %}
 
- {% for feature in features %}
+ {% for ticket in ticket %}
+  {% if ticket.paid == True %}
 <div class="row">
   <div class="col-sm-12">
 <div class="card border-primary mb-3">
-  <div class="card-header"><span class="badge badge-danger">{{ feature.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{ feature.views }}
-   <i class="fas fa-arrow-up"></i>{{ feature.feature_upvotes }}</span></div>
+  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{ ticket.views }}
+   <i class="fas fa-arrow-up"></i>{{ ticket.ticket_upvotes }}</span></div>
   <div class="card-body">
-    <h4 class="card-title">{{ feature.title|capfirst }}</h4>
-    <p class="card-text">{{ feature.description|capfirst }}</p>
+    <h4 class="card-title">{{ ticket.title|capfirst }}</h4>
+    <p class="card-text">{{ ticket.description|capfirst }}</p>
     <div class="card-footer text-muted">
-      {{ feature.creator|capfirst }} | {{ feature.created_date }}
-      <a href="{% url 'single_feature_view' feature.id %}" class="card-link">View feature</a>
+      {{ ticket.creator|capfirst }} | {{ ticket.created_date }}
+      <a href="{% url 'single_ticket_view' ticket.id %}" class="card-link">View ticket</a>
     </div>
   </div>
 </div>
 </div>
 </div>
+{% endif %}
 {% endfor %}
 
 

@@ -12,10 +12,10 @@ def show_all_tickets(request):
     View to show all our tickets on
     one page
     """
-    tickets = Ticket.objects.filter(created_date__lte=timezone.now(), paid=True)
+    ticket = Ticket.objects.filter(created_date__lte=timezone.now(), paid=True)
     
     context = {
-        'tickets': tickets
+        'ticket': ticket
     }
     return render(request, 'tickets.html', context)
     
@@ -53,31 +53,7 @@ def single_ticket_view(request, pk):
     
     return render(request, 'single_ticket.html', context)
     
-@login_required
-def edit_a_ticket(request, pk):
-    """
-    Route to allow users to edit their bug
-    """
-    ticket = get_object_or_404(Ticket, pk=pk)
-    
-    if request.method == "POST":
-        form = TicketCreationForm(request.POST, instance=ticket)
-        if form.is_valid():
-            ticket = form.save(commit=False)
-            ticket.creator = request.user
-            ticket.save()
-            messages.success(request, "Thanks {0}, {1} has been updated."
-                             .format(request.user, ticket.title),
-                             extra_tags="alert-success")
-            return redirect(reverse('profile'))
-    
-    else:
-        form = TicketCreationForm(instance=ticket)
-        
-    context = {
-        'form': form,
-    }
-    return render(request, 'edit_ticket.html', context)
+
     
  
 @login_required

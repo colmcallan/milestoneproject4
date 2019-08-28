@@ -6,7 +6,7 @@ main {
     margin-top: 3rem;
 }
 
-footer {
+.footer {
     position: fixed;
     bottom: 0px;
     height: 497px;
@@ -170,3 +170,22 @@ fieldset {
     margin: 40px;
 }
 
+/*Media Queries*/
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+    .footer {
+        position: fixed;
+        bottom: 0px;
+        height: 497px;
+        width: 100%;
+        background-color: #400346;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) {
+    ...
+}

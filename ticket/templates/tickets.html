@@ -12,12 +12,14 @@
 </div>
 {% endblock %} 
 
-{% block content %} {% for ticket in tickets %}
+{% block content %} 
+ {% for ticket in ticket %}
+  {% if ticket.paid == True %}
 <div class="row">
   <div class="col-sm-12">
 <div class="card border-primary mb-3">
-  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i></i>{{ ticket.views }}
-    <i class="fas fa-arrow-up"></i>{{ ticket.ticket_upvotes }}</span></div>
+  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{{ ticket.views }}
+   <i class="fas fa-arrow-up"></i>{{ ticket.ticket_upvotes }}</span></div>
   <div class="card-body">
     <h4 class="card-title">{{ ticket.title|capfirst }}</h4>
     <p class="card-text">{{ ticket.description|capfirst }}</p>
@@ -29,4 +31,6 @@
 </div>
 </div>
 </div>
-{% endfor %} {% endblock %}
+{% endif %}
+{% endfor %}
+ {% endblock %}

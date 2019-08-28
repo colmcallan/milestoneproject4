@@ -10,5 +10,5 @@ psycopg2==2.8.3
 pytz==2019.2
 requests==2.22.0
 s3transfer==0.2.1
-stripe~=1.70.0
+stripe==2.35.1
 whitenoise==4.1.3
