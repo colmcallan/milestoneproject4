@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Ticket, TicketComment
 from django.utils import timezone
 from django.contrib import messages
@@ -28,7 +28,7 @@ def show_all_tickets(request):
     
 def single_ticket_view(request, pk):
     """
-    Route to view a single ticket on
+    Route to view a single feature on
     one page
     """
     ticket = get_object_or_404(Ticket, pk=pk)
@@ -37,12 +37,10 @@ def single_ticket_view(request, pk):
         ticket_comment_form = TicketCommentForm(request.POST or None)
         if ticket_comment_form.is_valid():
             comment = request.POST.get('comment')
-            ticket_comment = TicketComment.objects.create(ticket=ticket, creator=request.user,
-                                                    comment=comment)
+            ticket_comment = TicketComment.objects.create(ticket=ticket, creator=request.user, comment=comment)
             ticket_comment.save()
-            messages.success(request, 'Thanks {} your comment has posted'
-                             .format(request.user), extra_tags="alert-success")
-            return redirect(reverse('single_ticket_view', kwargs={'pk': pk}))
+            messages.success(request, 'Thanks {} your comment has posted'.format(request.user), extra_tags="alert-success")
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
         ticket_comment_form = TicketCommentForm()
         ticket.views += 1
@@ -57,6 +55,8 @@ def single_ticket_view(request, pk):
         'ticket_comment_form': ticket_comment_form,
         'comments': comments,
     }
+    
+    
     return render(request, 'single_ticket.html', context)
 
  
