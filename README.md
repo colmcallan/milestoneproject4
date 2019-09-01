@@ -4,7 +4,7 @@
 
 *Django,  jQuery, CSS, font-Awesome, postgresql, heroku, aws*
 
-## [Demo Here](https://cookbook-recipe.herokuapp.com/)
+## [Demo Here](https://milestone-project-4.herokuapp.com/)
 
 ---
 
