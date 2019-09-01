@@ -9,6 +9,9 @@
     <title>{% block title %} {% endblock %}</title>
     
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
 
     <script src="https://kit.fontawesome.com/572952883f.js"></script>
     <!-- Font Awesome -->
@@ -37,16 +40,8 @@
 
         
             
-<main>
-        {% block heading %} {% endblock %}
         {% block content %} {% endblock %}
-        <!-- to top button -->
-		{% block to-top %} {% include 'includes/_to_top.html' %} {% endblock %}
-
-		<!-- busy-loader -->
-		{% include 'includes/_busy_loader.html' %}
-    </main>       
-    
+       
 
     {% block footer %} {% endblock %}
     <!-- Bootstrap CDN -->

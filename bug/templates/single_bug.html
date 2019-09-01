@@ -2,26 +2,58 @@
 {% block title %}{{ bug.title }}{% endblock %}
 
 {% block content %}
-<div class="jumbotron">
-    <h1>{{ bug.title }}</h1><span class="badge badge-danger">{{ bug.status }}</span>
-    <div class="inline">
-        <p class="p5"><span class=""><i class="fa fa-eye p5"></i>{{ bug.views }}<i class="fa fa-arrow-up p5"></i>{{ bug.bug_upvotes }}</span></p>
-        {% if user.is_authenticated %}
+<div class="container">
+<div class="row">
+  <div class="col-sm-12">
+      <div class="jumbotron">
+      <h1>Below is your bug!</h1>
+      <p> please feel free to edit or delete your bug. if you wish not to delete it, comment on it that it's resolved and it can be marked as "completed" so other users can refer to it if needs be.</p>
+      </div>
+      <div class="crdheader">
+    <div class="card text-dark bg-light">
+    <div class="card-header text-center">
+    <h3>Users Bugs!</h3><span class="badge badge-danger">{{ bug.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{{ bug.views }}
+   <i class="fas fa-arrow-up"></i>{{ bug.bug_upvotes }}{% if user.is_authenticated %}
         <button type="button" class="btn btn-outline-primary upvote-btn"><a href="{% url 'upvote_bug' bug.id %}">Upvote Bug</a></button>
         {% else %}
         <span>Please login to upvote a bug.</span>
-        {% endif %}
+        {% endif %}</div></div></span> 
+       
+    <div class="card-body ">
+        <h4 class="card-title">{{ bug.title|capfirst }}</h4>
+        <p class="card-text text-left"{{ bug.description|capfirst }}</p>
+      </div>
+    <div class="card-footer" style="color: black;">
+      <i class="fas fa-user"></i>{{ bug.creator|capfirst }} |<i class="far fa-calendar-alt"></i> {{ bug.created_date }}
+      <div class="inline justify-content-center">
+        <a href="{% url 'edit_a_bug' bug.id %}" class="px-1"><button type="button" class="btn btn-outline-info p5">Edit</button></a>
+        <form method="POST" action="{% url 'delete_a_bug' bug.id %}" id="delete_a_bug" class="px-1">{% csrf_token %}<button type="submit" class="btn btn-outline-warning p5">Delete</button></form>
+      </div>
+     </div>
     </div>
-    <p class="lead">{{ bug.description }}</p>
-    <hr class="my-4">
-    <p>Created by: {{bug.creator }} on {{ bug.created_date }}</p>
-</div>
+    </div>
+  </div>
 <div class="row">
     <div class="col-sm-12">
-
-        <form method="POST">
+        <div class="comment">
+         {% if comments.count == 0 %}
+        <br> 
+        <h4>There are no comments on this bug yet!</h4>
+        {% else %}
+        
+        {% for comment in comments %}
+        <blockquote class="blockquote text-left">
+            <p class="mb-0">{{ comment.comment|capfirst }}</p>
+            <footer class="blockquote-footer">{{ comment.bug|capfirst }}<cite title="Source Title" class="title"> | {{ comment.creator|capfirst }}</cite>
+            <datetime> on {{ comment.created_date }}</datetime></footer>
+        </blockquote>
+        {% endfor %}
+        
+        {% endif %}
+</div>
+        <form method="POST" id="bgfrm">
             <fieldset>
-                <h1>Comments:</h1>
+                <h1 class="bgcmmnts">Comments:</h1>
                 {% csrf_token %} {{ bug_comment_form|as_bootstrap }}
                 {% if user.is_authenticated %}
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -33,22 +65,9 @@
             </fieldset>
         </form>
         
-        {% if comments.count == 0 %}
-        <br> 
-        <h4>There are no comments on this bug yet!</h4>
-        {% else %}
-        
-        {% for comment in comments %}
-        <hr class="my-4">
-        <blockquote class="blockquote text-left">
-            <p class="mb-0">{{ comment.comment|capfirst }}</p>
-            <footer class="blockquote-footer">{{ comment.bug|capfirst }}<cite title="Source Title" class="title"> | {{ comment.creator|capfirst }}</cite>
-            <datetime> on {{ comment.created_date }}</datetime></footer>
-        </blockquote>
-        {% endfor %}
-        
-        {% endif %}
+       
 
     </div>
+</div>
 </div>
 {% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}

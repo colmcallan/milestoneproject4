@@ -8,31 +8,35 @@
 
 {% block content %}
 
+<h2>Bugs! ew! help us squash them!</h2>
+<br>
 {% for bug in bug %}
+
 <div class="row">
   <div class="col-sm-12">
-<div class="card border-primary mb-3">
-  <div class="card-header"><span class="badge badge-danger">{{ bug.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{ bug.views }}
-   <i class="fas fa-arrow-up"></i>{{ bug.bug_upvotes }}</span></div>
-  <div class="card-body">
-    <h4 class="card-title">{{ bug.title|capfirst }}</h4>
-    <p class="card-text">{{ bug.description|capfirst }}</p>
-    <div class="card-footer text-muted">
-      {{ bug.creator|capfirst }} | {{ bug.created_date }}
+    <div class="card text-dark bg-light">
+    <div class="card-header text-center"><h3>Users Bugs!</h3><span class="badge badge-danger">{{ bug.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{{ bug.views }}
+   <i class="fas fa-arrow-up"></i>{{ bug.bug_upvotes }}</span></div></div>
+      <div class="card-body ">
+        <h4 class="card-title">{{ bug.title|capfirst }}</h4>
+        <p class="card-text text-left"{{ bug.description|capfirst }}</p>
+      </div>
+      <div class="card-footer text-muted">
+      <i class="fas fa-user"></i>{{ bug.creator|capfirst }} |<i class="far fa-calendar-alt"></i> {{ bug.created_date }}
       <a href="{% url 'single_bug_view' bug.id %}" class="card-link">View bug</a>
     </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
+  
+
 {% endfor %}
 
- {% for ticket in ticket %}
+ {% for ticket in tickets %}
   {% if ticket.paid == True %}
 <div class="row">
   <div class="col-sm-12">
 <div class="card border-primary mb-3">
-  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{ ticket.views }}
+  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{{ ticket.views }}
    <i class="fas fa-arrow-up"></i>{{ ticket.ticket_upvotes }}</span></div>
   <div class="card-body">
     <h4 class="card-title">{{ ticket.title|capfirst }}</h4>

@@ -2,21 +2,30 @@
 {% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
 {% load staticfiles %}
 {% block head_title %}Bugs No More{% endblock %}
-{% block css %}<link rel="stylesheet" href="{% static 'home/css/home.css' %}"/>{% endblock %}
 {% block content %}
+<header class="masthead" style="background-image: url('https://analyticsindiamag.com/wp-content/uploads/2018/01/banner.jpg')">
+<div class="site-heading">
+        <h2 class="hide">bugs are here to be squashed</h2>
+</header>
 
-
-
-<br>
-<br>
-<section class="section">
-     <h1>Welcome to bugs no more!</h1>
+<section class="container">
+    <div class="jumbotron">
+     <h1 class="colorh">Welcome to bugs no more!</h1>
 <p>
 Are you tired of scouring the web to look for a similar issue to what you're having answered by a company or blog, however not exactly the issue you're having? welcome to No More Bugs    
 </p>
+</div>
+<br>
+<div class="para">
+<h2 class="colorh">We've all had our issues</h2>
+<p>In web development/software development and a lot of times an extra set of eyes can really help out with your current issues! There is no shame in asking for help, especially in this line of work
+so please don't hesitate to post your question in the bug section of this site and wait for someone to respond or feel free to pay for a ticket being raised and the tickets with the most upvotes/donations will recieve 
+a quicker response/resolution.</p>
+</div>
 </section>
+
+
 <!-- to top button -->
-	{% block to-top %}	{% include 'includes/_to_top.html' %} {% endblock %}
 
 		<!-- busy-loader -->
 {% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}

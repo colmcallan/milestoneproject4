@@ -11,7 +11,7 @@ from ticket.models import Ticket
 
 # Create your views here.
 def register(request):
-    """Lets bug register to site"""
+    """Lets users register to site"""
     if request.user.is_authenticated:
         messages.success(request, "You are already logged in", 
                          extra_tags="alert-primary")
@@ -86,14 +86,12 @@ def profile(request):
     user = User.objects.get(email=request.user.email)
     bug = Bug.objects.filter(creator=user.id)
     ticket = Ticket.objects.filter(creator=user.id, paid=True)
-    paginator = Paginator(bug, 1)
-    page = request.GET.get('page')
-
+    
     context = {
         'profile': user,
         'bug': bug,
         'ticket': ticket,
     }
     
-    return render(request, 'profile.html', context, {'bug': bug})
+    return render(request, 'profile.html', context)
 

@@ -7,6 +7,8 @@
 {% block heading %}<h1>Register Page</h1>{% endblock %}
 
 {% block content %}
+<div class="registerfrm">
+    <p>Please enter the relevant details below to register your account! all fields are required to register your account with us, happy de-bugging!</p>
     <form method="POST">
     {% csrf_token %}
     {{ registration_form | as_bootstrap }}
@@ -14,5 +16,6 @@
     </form>
     <br>
     <p>Already Registered? Click <a href="{% url 'login' %}">here.</a></p>
+    </div>
 {% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}
 </main>

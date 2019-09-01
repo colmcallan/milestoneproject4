@@ -35,7 +35,8 @@ class Ticket(models.Model):
     
     def __str__(self):
         return self.title
-        
+
+
 
 class TicketComment(models.Model):
     """Ticket Comments by other users and creator"""

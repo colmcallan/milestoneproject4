@@ -3,7 +3,9 @@ from .models import Ticket, TicketComment
 from django.utils import timezone
 from django.contrib import messages
 from .forms import TicketCommentForm, TicketCreationForm
+from .models import Ticket, TicketComment
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -12,14 +14,18 @@ def show_all_tickets(request):
     View to show all our tickets on
     one page
     """
-    ticket = Ticket.objects.filter(created_date__lte=timezone.now(), paid=True)
+    tickets = Ticket.objects.filter(created_date__lte=timezone.now(), paid=True)
+    paginator = Paginator(tickets, 2)  # Show 5 tickets per page
+    page = request.GET.get('page')
+    try:
+        tickets = paginator.page(page)
+    except PageNotAnInteger:
+        tickets = paginator.page(1)
+    except EmptyPage:
+        tickets = paginator.page(paginator.num_pages)
+        
+    return render(request, "tickets.html", {'tickets': tickets})
     
-    context = {
-        'ticket': ticket
-    }
-    return render(request, 'tickets.html', context)
-    
-
 def single_ticket_view(request, pk):
     """
     Route to view a single ticket on
@@ -31,10 +37,12 @@ def single_ticket_view(request, pk):
         ticket_comment_form = TicketCommentForm(request.POST or None)
         if ticket_comment_form.is_valid():
             comment = request.POST.get('comment')
-            ticket_comment = TicketComment.objects.create(ticket=ticket, creator=request.user, comment=comment)
+            ticket_comment = TicketComment.objects.create(ticket=ticket, creator=request.user,
+                                                    comment=comment)
             ticket_comment.save()
-            messages.success(request, 'Thanks {} your comment has posted'.format(request.user), extra_tags="alert-success")
-            return redirect(request.META.get('HTTP_REFERER'))
+            messages.success(request, 'Thanks {} your comment has posted'
+                             .format(request.user), extra_tags="alert-success")
+            return redirect(reverse('single_ticket_view', kwargs={'pk': pk}))
     else:
         ticket_comment_form = TicketCommentForm()
         ticket.views += 1
@@ -49,12 +57,8 @@ def single_ticket_view(request, pk):
         'ticket_comment_form': ticket_comment_form,
         'comments': comments,
     }
-    
-    
     return render(request, 'single_ticket.html', context)
-    
 
-    
  
 @login_required
 def create_a_ticket(request):
@@ -80,6 +84,31 @@ def create_a_ticket(request):
     
     return render(request, 'create_ticket.html', context)
 
+@login_required
+def edit_a_ticket(request, pk):
+    """
+    Route to allow users to edit their ticket
+    """
+    ticket = get_object_or_404(Ticket, pk=pk)
+    
+    if request.method == "POST":
+        form = TicketCreationForm(request.POST, instance=ticket)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.creator = request.user
+            ticket.save()
+            messages.success(request, "Thanks {0}, {1} has been updated."
+                             .format(request.user, ticket.title),
+                             extra_tags="alert-success")
+            return redirect(reverse('profile'))
+    
+    else:
+        form = TicketCreationForm(instance=ticket)
+        
+    context = {
+        'form': form,
+    }
+    return render(request, 'edit_a_ticket.html', context)
 
 @login_required
 def delete_a_ticket(request, pk):
@@ -96,3 +125,5 @@ def delete_a_ticket(request, pk):
     else:
         messages.error(request, '{} unfortunatley at this time your ticket cannot be deleted.'.format(request.user), extra_tags="alert-primary")
         return redirect(request.META.get('HTTP_REFERER'))
+        
+

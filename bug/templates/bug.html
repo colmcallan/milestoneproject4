@@ -1,33 +1,55 @@
-    
-{% extends 'base.html' %} {% block title %}Bugs{% endblock %}
+{% extends 'base.html' %}
+{% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
+{% load staticfiles %}
+{% block title %}Bugs{% endblock %}
 
 
-{% block heading %}
+
+{% block content %} 
+<div class="container">
 <div class="row">
   <div class="col-sm-12">
+    <div class="bgstop">
     <h1>
-      <span>Bugs</span>
-   <a href="{% url 'create_a_bug' %}"><button type="button" class="btn btn-primary pull-right p5">Add Bug</button></a>
+      <span>Help our user's squash those bugs! or </span>
+   <a href="{% url 'create_a_bug' %}"><button type="button" class="btn btn-primary pull-right p5">Add Bug Here</button></a>
    </h1>
+   </div>
   </div>
 </div>
-{% endblock %} 
-
-{% block content %} {% for bug in bug %}
+{% for bug in bug %}
 <div class="row">
   <div class="col-sm-12">
-<div class="card border-primary mb-3">
-  <div class="card-header"><span class="badge badge-danger">{{ bug.status }}</span><span class="card-link"><i class="fa fa-eye p5"></i>{{ bug.views }}
-    <i class="fa fa-arrow-up p5"></i>{{ bug.bug_upvotes }}</span></div>
-  <div class="card-body">
-    <h4 class="card-title">{{ bug.title|capfirst }}</h4>
-    <p class="card-text">{{ bug.description|capfirst }}</p>
-    <div class="card-footer text-muted">
-      {{ bug.creator|capfirst }} | {{ bug.created_date }}
+    <div class="card text-dark bg-light">
+    <div class="card-header text-center"><h3>Users Bugs!</h3><span class="badge badge-danger">{{ bug.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{{ bug.views }}
+   <i class="fas fa-arrow-up"></i>{{ bug.bug_upvotes }}</span></div></div>
+      <div class="card-body ">
+        <h4 class="card-title">{{ bug.title|capfirst }}</h4>
+        <p class="card-text text-left"{{ bug.description|capfirst }}</p>
+      </div>
+      <div class="card-footer" style="color: black;">
+      <i class="fas fa-user"></i>{{ bug.creator|capfirst }} |<i class="far fa-calendar-alt"></i> {{ bug.created_date }}
       <a href="{% url 'single_bug_view' bug.id %}" class="card-link">View bug</a>
     </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
-{% endfor %} {% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}
+  <br>
+
+
+{% endfor %} 
+  <!--pagination--->
+ <div class="pagination">
+    <span class="step-links">
+        {% if bug.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ bug.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ bug.number }} of {{ bug.paginator.num_pages }}.
+        </span> {% if bug.has_next %}
+    <a href="?page={{ bug.next_page_number }}">next</a>
+    <a href="?page={{ bug.paginator.num_pages }}">last &raquo;</a> {% endif %}
+    </span>
+  </div>
+  </div>
+  {% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}

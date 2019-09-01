@@ -1,4 +1,3 @@
 # milestoneproject4
 
-
-https://pythonprogramming.net/working-foreign-keys-django-tutorial/?completed=/foreign-keys-django-tutorial/
+[![Build Status](https://travis-ci.org/colmcallan/milestoneproject4.svg?branch=master)](https://travis-ci.org/colmcallan/milestoneproject4)

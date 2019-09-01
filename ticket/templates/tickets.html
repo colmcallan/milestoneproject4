@@ -1,36 +1,55 @@
 {% extends 'base.html' %} {% block title %}Tickets{% endblock %}
 {% block nav %} {% include 'includes/_navbar.html' %} {% endblock %}
+{% block content %} 
+<main>
 
-{% block heading %}
 <div class="row">
   <div class="col-sm-12">
     <h1>
-      <span>tickets</span>
+      tickets </h1>
+      <div class="jumbotron">
+        <p class="tckp">As you can see, some of our users have chose to pay for a feature to be resolved for them, if you have the same issue, please view/comment and upvote the issue. the more up-votes the quicker resoltuion!
+        (up-voting requires a fee and the ticket will be added to your cart)</p>
    <a href="{% url 'create_a_ticket' %}"><button type="button" class="btn btn-primary pull-right p5">Add ticket</button></a>
-   </h1>
+   </div>
   </div>
 </div>
-{% endblock %} 
+<!--pagination--->
+ <div class="pagination">
+    <span class="step-links">
+        {% if tickets.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ tickets.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ tickets.number }} of {{ tickets.paginator.num_pages }}.
+        </span> {% if tickets.has_next %}
+    <a href="?page={{ tickets.next_page_number }}">next</a>
+    <a href="?page={{ tickets.paginator.num_pages }}">last &raquo;</a> {% endif %}
+    </span>
+  </div>
 
-{% block content %} 
- {% for ticket in ticket %}
-  {% if ticket.paid == True %}
+{% for ticket in tickets %}
 <div class="row">
   <div class="col-sm-12">
-<div class="card border-primary mb-3">
-  <div class="card-header"><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{{ ticket.views }}
-   <i class="fas fa-arrow-up"></i>{{ ticket.ticket_upvotes }}</span></div>
-  <div class="card-body">
-    <h4 class="card-title">{{ ticket.title|capfirst }}</h4>
-    <p class="card-text">{{ ticket.description|capfirst }}</p>
-    <div class="card-footer text-muted">
-      {{ ticket.creator|capfirst }} | {{ ticket.created_date }}
+    <div class="card text-dark bg-light">
+    <div class="card-header text-center"><h3>Users Tickets!!</h3><span class="badge badge-danger">{{ ticket.status }}</span><span class="card-link"><i class="fas fa-eye"></i>{{ ticket.views }}
+   <i class="fas fa-arrow-up"></i></span></div></div>
+      <div class="card-body ">
+        <h4 class="card-title">{{ ticket.title|capfirst }}</h4>
+        <p class="card-text text-left"{{ ticket.description|capfirst }}</p>
+      </div>
+      <div class="card-footer" style="color: black;">
+      <i class="fas fa-user"></i>{{ ticket.creator|capfirst }} |<i class="far fa-calendar-alt"></i> {{ ticket.created_date }}
       <a href="{% url 'single_ticket_view' ticket.id %}" class="card-link">View ticket</a>
     </div>
+    </div>
   </div>
-</div>
-</div>
-</div>
-{% endif %}
+  <br>
+
 {% endfor %}
- {% endblock %}
+
+  
+ 
+</main>
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}

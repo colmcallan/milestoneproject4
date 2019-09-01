@@ -7,6 +7,8 @@
 {% block heading %}<h1>Login Page</h1>{% endblock %}
 
 {% block content %}
+<h2> please input your email address and password below to login! if you're not registered, please do so <a href="{% url 'register' %}">here</a></h2>
+    <div class="loginfrm">
     <form method="POST">
     {% csrf_token %}    
     {{ login_form | as_bootstrap }}
@@ -14,5 +16,6 @@
     </form>
     <br>
     <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
-{% endblock %}
+    </div>
+{% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}
 </main>
