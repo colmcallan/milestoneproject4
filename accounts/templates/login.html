@@ -7,7 +7,7 @@
 {% block heading %}<h1>Login Page</h1>{% endblock %}
 
 {% block content %}
-<h2> please input your email address and password below to login! if you're not registered, please do so <a href="{% url 'register' %}">here</a></h2>
+<h2 class="loginh2"> please input your email address and password below to login! if you're not registered, please do so <a href="{% url 'register' %}">here</a></h2>
     <div class="loginfrm">
     <form method="POST">
     {% csrf_token %}    

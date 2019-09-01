@@ -2,7 +2,9 @@
 
 *Python and JavaScript Full Stack Project by [Colm Callan](https://github.com/colmcallan/milestoneproject4)*
 
-*Django,  jQuery, CSS, font-Awesome*
+*Django,  jQuery, CSS, font-Awesome, postgresql, heroku, aws*
+
+## [Demo Here](https://cookbook-recipe.herokuapp.com/)
 
 ---
 
@@ -10,7 +12,7 @@
 
 ## Overview
 
-- Bugs No More is a Bug and Feature Ticket Creation site where users can create tickets which can then be voted on to increase the tickets rank to be worked on by the in-house developers.
+- Bugs No More is a Bug and  Ticket Creation site where users can create tickets which can then be voted on to increase the tickets rank to be worked on by the in-house developers.
 - The main development features included the login system, bug feed and ticket creation editing and commenting on those tickets.
 - The login system uses django AllAuth and allows users to sign up and in with a username and email address.
 - The ticket/bugs section makes good use of pagination rendering to enhance to user experience.
@@ -27,13 +29,8 @@
     - As a user ... I can view documentation to how the site works and any faq's.
     - As a user ... I have the option to sign up / sign in with a local profile or my github profile.
     - As a user ... If I forget my password, I can reset it.
-    - As a user ... I can delete my account and all tickets associated with it.
-    - As a user ... I can see charts indicating the highest voted and most tended to bugs and features.
-    - As a user ... I can see an activity feed of recent actions by users site wide.
-    - As a user ... I can create / edit / update / delete my own tickets for a bug / feature. 
-    - As a user ... I can create / edit / update / delete my own comments for a bug / feature.
-    - As a user ... I can add / remove my own up-vote to another users bug/feature.
-    - As a user ... I can make a payment to up-vote a feature which will be reflected in the sites most tended to charts.
+    - As a user ... I can create / edit / update / delete my own tickets for a bug. 
+    - As a user ... I can make a payment to up-vote a ticket.
     - As a user ... I can view and perform actions on the site on a mobile device comfortably. 
 
 2. Functionality Specifications
@@ -41,9 +38,8 @@
     - create login system with django all-auth to allow signing up with github
     - create frontend pages to advertise the site to encourage users to sign up
     - create documentation to show users how to use the site its features.
-    - create charts showing bugs / features with highest up-votes (daily, weekly , monthly)
-    - create priority based queue tickets system for bugs and features
-    - create ability for users to comment on tickets
+    - create priority based queue tickets system tickets.
+    - create ability for users to comment on tickets/bugs
     - create stripe checkout system for feature up-votes
 
 
@@ -78,8 +74,8 @@ To simplify user experience and encourage users to sign up! Most features of the
 
 ### Django apps used the create the site:  
 
-- home [ home, faq, profile ]
-- accounts ( all-auth  )
+- home [ home, faq ]
+- accounts ( all-auth, profile, login, logout)
 - tickets
 - cart (session and context processor based)
 - checkout ( stripe )
@@ -95,6 +91,14 @@ UX, Colors and Design
 
 Throughout the project, I tried to keep the user/consumer at heart and look at it from the view of a real user when designing my site. I feel that I've achieved this well.
 
+**Responsiveness** - My app is fully responsive; through the entire development and design process I continuously tested my app under Chrome Developer tools and testing various different screens sizes. By this I was able to perform periodic checks throughout the development process to ensure that my app was responsive across all device screens ranging from extra small to extra-large. Where needed I just used media queries to fix any resolution issues or responsiveness issues. I have built my app on the [Bootsrap4](https://getbootstrap.com/) a universally used grid system and using custom CSS to ensure full responsiveness. 
+
+My app has been testing by friends and family members where needed notes were made and identified bugs were fixed. 
+
+From doing this I have been able to confidently say that my app is fully responsiveness across all devices. 
+
+---
+
 #### Wireframes:
 
 [Wireframes](https://github.com/colmcallan/milestoneproject4/tree/master/wireframes) 
@@ -107,13 +111,12 @@ All wireframes for mobile and desktop can be found here.
 for the data of users/inputted tickets/bugs this was used with postgresql and django. 
 ---
 
-## Features
 
 #### Accounts / Profiles  
 
 - used django all-auth to handle user login, signup, password resets ...
 - you can sign in with either your email or username, both of which must be unique.
-- ability to reset password and link sent to email address provided. 
+- ability to reset password and link sent to email address provided. [if smtp error populates from google, please contact me in the contact us link in the nav]
 
 
 #### Bugs Page
@@ -123,7 +126,8 @@ for the data of users/inputted tickets/bugs this was used with postgresql and dj
 - You'll see actions such as:
     - A list of all bugs raised
     - The ability to view the bug and comment on it
-    - up-vote the bug to add it to your cart as a ticket to speed up the fixing process by us
+    - Up-vote the bug to add it to your cart as a ticket to speed up the fixing process by us
+    - Bug results are paginated for a better User Experience
     
 
 
@@ -134,9 +138,8 @@ Where there's Code, there's a Bug!
 - Tickets are the paid for service to speed up the process of having it fixed.
 - You can view the most recently created tickets and paginate through the results.
 - You can  the search bar will search through all tickets that are paid for.
-- You can use filter will filter your results, you can also search and filter results together.
-- If your search become to narrow, you can the reset all button to start again.
-- You can only vote on for a bug once.
+- You can only vote on for a ticket once.
+- Ticket results are paginated for a better User Experience
 
 
 The tickets app makes use of django's class based views, namely `ListView, DetailView, CreateView, UpdateView` to do most of the heavy lifting for me. 
@@ -160,7 +163,7 @@ The Details, Create and Edit page share the same ticket details, preview, the di
 
 #### Cart
 
-You can support bugs by buying votes and adding the ticket to your cart. 
+You can support tickets by buying votes and adding the ticket to your cart. 
 
 - You'll see an itemised list of the items you have chosen.
 - You have the option to purchase multiple votes, both single and double. Each item will be a separate item, this is a chosen design.
@@ -251,49 +254,90 @@ I have used django built in `TestCase` for testing, and I going app by app, test
  - I believe most tests are noted in each app and all passed.
 
 
-#### Browser Testing
 
-While my main choice of browser for development is google chrome, I regularly checked the performance on firefox and opera browsers. Making use of browser resizing and dev tools device toolbars on each browser to test responsiveness and how how the grid, fonts and media queries were performing and the consistency between each. Adjusting to find a happy medium for all three.
+**Browser compatibility** 
 
-After I had test deployed the site to heroku I was able to see the real life versions which I was able to test on a android phone, amazon fire tablet and at different orientations. Unfortunately, I have no safari devices which I am able test on.
 
-The two css libraries in use, semantic ui and beardcss, and the few media queries I wrote were quite sufficient and while there was a few times that trying to override the css styles of those libraries become difficult I was able to get it fixed without any real issues. 
+My app will be fully functional across all major modern browsers. I have tested my app on the following browsers.
+
+- [Chrome](https://www.google.com/chrome/)
+- [Firefox](https://www.mozilla.org/en-GB/firefox/new/)
+- [Opera](https://www.opera.com/)
+- [IE Edge](https://www.microsoft.com/en-gb/windows/microsoft-edge)
+- [IE](https://www.microsoft.com/en-gb/windows/microsoft-edge)
+- [Safari](https://support.apple.com/en_GB/downloads/safari)
+- [Chrome Mobile](https://chrome.en.softonic.com/)
+
+---
+
+## Resource Sites Used
+- [Edam](https://developer.edamam.com/edamam-docs-recipe-api)
+- [Bootsrap4 Docs](https://getbootstrap.com/docs/4.3/getting-started/introduction/)
+- [Fontawesome Icons](https://fontawesome.com/)
+- [Flask Docs](http://flask.pocoo.org/docs/1.0/)
+- [Mongo Docs](https://docs.mongodb.com/)
+- [Slack](https://slack.com/intl/en-gb/)
+- [Google](https://google.com/)
+- [YouTube](https://www.youtube.com/)
+
+---
+
+### HTML & CSS
+All my HTML and CSS is valid, checked with the following validators
+
+- [HTML Validator](https://validator.w3.org/)
+-  [CSS Validator](https://jigsaw.w3.org/css-validator/)
 
 ####  User testing
 
 As always, I have asked multiple friends, and other students from the course to test the website on their devices and received positive feedback  on their side of things on errors, indicating that there was not too many issues to be found. I am satisfied with the outcome.
 
 ### NOTED BUG TO BE FIXED 
-When a logged in users tries to view a single bug it returns a reversematch error. This is noted and a high priority to fix (with the time left to submit my project, I have to submit without being resolved. however it works for a user not logged in. that was the only bug raised and noted)
+When a logged in users tries to view a single bug it returns a reversematch error. This is now resolved and returns no errors. There are no broken links on this site.
+---
+
 
 ---
 
-## GIT
+## Deployment 
 
-Git has been used extensively through the entire project build. I have regularly made commits at each meaningful stage and also at regular intervals to save me work.
+Getting my application ready for deployment consisted of the following: - 
+1. Removing all my hard-coded environment variables to project my keys and secrets. These were placed in the heroku Config Vars for production.
+2. Ensuring the applications requirements.txt is up-to-date with all the latest packages installed for my app being noted on this file. 
+	**The command to update requirements**
+		```
+		pip3 freeze > requirements.txt
+		```
+3. Set up the Procfile - *A Procfile is required by Heroku in order to tell the service worker what command to run for my application to start.*
+4. Set Flask's debugging to False.
+5. Push all my latest production ready code to GitHub ready for deployment via Heroku's GitHub function where you can deploy from GitHub the production ready app.
+6. IF using AWS cloud9, uninstall all requirements in the requirements.txt file and reinstall the following;
+    1. `boto3`
+	2. `botocore`
+	3. `certifi`
+	4. `chardet`
+	5. `coverage`
+	6. `Django`
+	7. `django-forms-bootstrap`
+	8. `django-storages`
+	9. `docutils`
+	10. `gunicorn`
+	11. `idna`
+	12. `jmespath`
+	13. `psycopg2`
+	14. `python-dateutil`
+	15. `pytz`
+	16. `requests`
+	17. `s3transfer`
+	18. `six`
+	19. `stripe`
+	20. `urllib3`
 
-I have created different branches to develop important apps such as the tickets app and the comments app. On completion, I would then merge the branch into the master branch and push to github.
 
-I have made use of the .gitignore file to exclude my unneeded files such as pycache, venv and pycharm files and folders.
+**Upon successful deployment Heroku will give you the URL that is hosted your app**
 
-Unsure of what to exclude for django I referenced gitignore.io for a generic django template to help me decide what to exclude from pushing to github. 
+*Upon unsuccessful deployment Heroku will log the cause of the error and this is view able in the 'view log' section on the Heroku website. Here you will find a detailed report of what has cause your application not to be deployed successfully. *
 
----
-
-## Deployment
-
-#### Deployment to Heroku
-
-
-My deployment process was as follows:
-- Installed `whitenoise` and configured my settings file for it, performed a test with debug off and collected staticfiles to ensure it worked and the 404, 500 pages work as expected.
-- Installed `heroku-cli` on my machine, logged in and added the heroku remote to git.
-- On heroku I added the Postgres add-on .   
-- Installed pillow, dj-database-url and gunicorn.
-- Created a Procfile and requirements.txt
-- Further set-up my settings (manage.py) to read from the env vars on Heroku which I set it.
-- Pushed to heroku and when the build process had successfully finished, ran migrations and created a superuser.
-- The application was now fully deployed and ready for the database to be populated. 
 
 #### Setting the project up in a local development environment
 
@@ -313,24 +357,26 @@ Or  Visual Studio Code https://code.visualstudio.com/
 
 - Click the download zip button on the github repository or open a terminal and enter `git clone`https://github.com/colmcallan/milestoneproject4
 - if possible open a terminal session in the unzip folder or `cd` to the correct location
-Next your need to install a virtual environment for the python interpreter, I recommend using pythons built in virtual environment. Enter the command `python -m venv venv` . NOTE: Your python command may differ, such as `python3` or `py`.
-- Activate the `venv` with the command `source venv/bin/activate`, again this may differ depending on your operating system, please check https://docs.python.org/3/library/venv.html for further instructions.
 - If needed, Upgrade pip locally by `pip install --upgrade pip`.
-- Install all required modules with the command `pip -r requirements.txt`.
-- In the `src/project/settings/` folder create a new file called `local.py`. Copy all the values from `production.py` to this file. You'll now need to change the values of all variables to your personal values.
-** Note: You'll need to set up an account at Stripe and Mailgun to get your personal api keys**
-- Once that has been done, you may `cd` into the `src` folder and run `./manage.py migrate`
-- Followed by `./manage.py createsuperuser`, and follows the prompts in the terminal.
-- launch the application with `./manage.py ruunserver`
+** Note: You'll need to set up an account at Stripe to get your personal api keys**
+- Once that has been done, you may `cd` into the `src` folder and run `manage.py migrate`
+- Followed by `manage.py createsuperuser`, and follows the prompts in the terminal.
+- launch the application with `manage.py ruunserver`
 - The application should now be launch-able, but not quite fully functional just yet.    
 
 
 
 ---
+### Things that could be improve if had more time
+- Allow users to choose an avatar for their profile
+- Include data charts of Bugs/Tickets by upvotes
 
-## Credits
+## Credits & Acknowledgments 
+Credit is due to the following names. I would like to thank each and every one who has helped or contributed to my project in any way. Please see list of names below:
 
-Aside from the aforementioned below, all code is my own work, referencing and making use of official documentation when needed.
+- Mentor **Guido Cecilio Garcia**
+- Youtuber **Pretty Printed**
+- Friends who helped functionality and code review **Wesley Redmond**, **Conor Fitzsimons**
 
 
 #### Thanks  

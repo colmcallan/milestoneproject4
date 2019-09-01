@@ -1,5 +1,5 @@
 db.sqlite3
-__pycache
+__pycache__
 .~c9*
 env.py
-/static
+static

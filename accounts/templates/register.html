@@ -7,6 +7,7 @@
 {% block heading %}<h1>Register Page</h1>{% endblock %}
 
 {% block content %}
+<div class="container">
 <div class="registerfrm">
     <p>Please enter the relevant details below to register your account! all fields are required to register your account with us, happy de-bugging!</p>
     <form method="POST">
@@ -16,6 +17,7 @@
     </form>
     <br>
     <p>Already Registered? Click <a href="{% url 'login' %}">here.</a></p>
+    </div>
     </div>
 {% endblock %} {% block footer %} {% include 'includes/_footer.html' %} {% endblock %}
 </main>
