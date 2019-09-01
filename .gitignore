@@ -2,3 +2,4 @@ db.sqlite3
 __pycache
 .~c9*
 env.py
+/static
